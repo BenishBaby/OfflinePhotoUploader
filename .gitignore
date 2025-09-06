@@ -1,0 +1,54 @@
+# Gradle files
+.gradle/
+build/
+*/build/
+
+# Local configuration files
+local.properties
+.idea/
+*.iml
+
+# MacOS specific
+.DS_Store
+
+# Log files
+*.log
+
+# Android Studio
+.cxx/
+captures/
+.externalNativeBuild/
+
+# Keystore files
+*.jks
+
+# Gradle caches
+.gradle/
+**/build/
+
+# Auto-generated files
+*.apk
+*.ap_
+*.dex
+
+# Signing
+signing.properties
+
+# Crashlytics/Firebase
+crashlytics-build.properties
+fabric.properties
+
+# Google Services
+google-services.json
+google-services.plist
+
+# NDK
+obj/
+.vscode/
+
+# Jetpack Compose compiler metrics (optional)
+compose-metrics/
+compose-report/
+
+# Kotlin
+*.kotlin_module
