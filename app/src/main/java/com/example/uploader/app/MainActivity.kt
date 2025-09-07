@@ -1,40 +1,28 @@
 package com.example.uploader.app
 
-import android.net.Uri
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity // Changed from ComponentActivity
+import androidx.navigation.fragment.NavHostFragment
+// import androidx.navigation.ui.setupActionBarWithNavController // Uncomment if you have an ActionBar
+import com.example.uploader.R
 import dagger.hilt.android.AndroidEntryPoint
-import com.example.uploader.app.ui.MainScreen
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
-
-    private val vm: UploadViewModel by viewModels() // ViewModel for handling results
-
-    // registerForActivityResult remains in MainActivity's onCreate (implicitly via property init)
-    private val picker: ActivityResultLauncher<PickVisualMediaRequest> =
-        registerForActivityResult(
-            ActivityResultContracts.PickMultipleVisualMedia(20)
-        ) { uris: List<Uri> ->
-            // Ensure vm is initialized. It will be by the time this callback runs.
-            vm.enqueue(uris)
-        }
-
+class MainActivity : AppCompatActivity() { // Changed to AppCompatActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MainScreen(
-                stateFlow = vm.state,
-                onPick = {
-                    picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                },
-                onRetry = { vm.retry() }
-            )
-        }
+        setContentView(R.layout.activity_main) // Set content from XML
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        // If you have an ActionBar and want to integrate navigation with it:
+        // setupActionBarWithNavController(navController)
     }
+
+    // If using setupActionBarWithNavController, you might also need to override onSupportNavigateUp:
+    // override fun onSupportNavigateUp(): Boolean {
+    //     val navController = findNavController(R.id.nav_host_fragment) // or import androidx.navigation.findNavController
+    //     return navController.navigateUp() || super.onSupportNavigateUp()
+    // }
 }

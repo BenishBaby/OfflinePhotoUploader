@@ -17,8 +17,8 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+        testInstrumentationRunner = "com.example.uploader.app.CustomTestRunner" // Changed
+     }
 
     buildFeatures { compose = true }
     composeOptions { kotlinCompilerExtensionVersion = "1.5.14" }
@@ -65,6 +65,12 @@ dependencies {
     // Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.51")
     kapt("com.google.dagger:hilt-compiler:2.51")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
 
     // Tests
     testImplementation("junit:junit:4.13.2")
@@ -74,9 +80,14 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.0")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.6.1")
     // Core library
-    androidTestImplementation("androidx.test:runner:1.6.1") // Or latest
-    androidTestImplementation("androidx.test:rules:1.6.1")  // For test rules like ActivityScenarioRule
+    androidTestImplementation("androidx.test:runner:1.6.1") 
+    androidTestImplementation("androidx.test:rules:1.6.1")
+
+    // Hilt Testing
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.51") 
+    kaptAndroidTest("com.google.dagger:hilt-compiler:2.51") 
 }
 
 extensions.configure<org.jetbrains.kotlin.gradle.plugin.KaptExtension>("kapt") {
