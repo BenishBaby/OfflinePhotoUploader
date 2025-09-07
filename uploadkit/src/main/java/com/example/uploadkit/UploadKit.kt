@@ -18,20 +18,31 @@ object UploadKit {
     private lateinit var processor: QueueProcessor
     private lateinit var database: UploadDatabase
 
-    val uploads by lazy { ObserveUploadsUseCase(repository) }
-    val enqueue by lazy { EnqueuePhotosUseCase(repository) }
-    val retry by lazy { RetryFailedUseCase(repository) }
-
+    /**
+     * Initialize the UploadKit SDK. Call this method in your Application's onCreate().
+     *
+     * @param context The application context.
+     */
     fun init(context: Context) {
         appContext = context.applicationContext
         val fileStore = AndroidFileStore(appContext)
-        repository = UploadRepositoryImpl(appContext, fileStore)
-
         database = Room.databaseBuilder(appContext, UploadDatabase::class.java, "uploads.db").build()
+
         val dao = database.uploads()
+        repository = UploadRepositoryImpl(dao, fileStore)
+
         val uploader = FirebaseUploader(appContext)
         val network = NetworkMonitor(appContext)
         processor = QueueProcessor(dao, uploader, network)
         processor.start()
+    }
+
+    /**
+     * Call this when your app/service is shutting down to release resources.
+     */
+    fun shutdown() {
+        if (::processor.isInitialized) {
+            processor.stop()
+        }
     }
 }

@@ -37,8 +37,8 @@ object UploadKitModule {
 
     @Provides
     @Singleton
-    fun provideUploadRepository(@ApplicationContext context: Context, fileStore: FileStore): UploadRepository =
-        UploadRepositoryImpl(context, fileStore)
+    fun provideUploadRepository(dao: UploadDao, fileStore: FileStore): UploadRepository =
+        UploadRepositoryImpl(dao, fileStore)
 
     @Provides
     @Singleton
