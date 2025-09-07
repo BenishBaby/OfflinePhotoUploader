@@ -2,6 +2,9 @@
 
 A simple, **offline‑first** Android app that lets users select photos and upload them to **Firebase Storage**. Photos are placed in a **persistent Room queue** and upload automatically when connectivity is available. The upload logic ships as a **reusable module** (`uploadkit`).
 
+## Things to Improve
+No need of fragment , use jetpack navigation. Add accessibility to the views. Check to how to add security for the Firebase interaction
+
 ## Architecture
 - **Clean-ish MVVM** in `app` (Compose UI + ViewModel)
 - **uploadkit** module encapsulates:
