@@ -20,7 +20,7 @@ class FirebaseUploader(private val context: Context) {
         val ref = storage.reference.child("uploads/${UUID.randomUUID()}.jpg")
         val task = ref.putFile(android.net.Uri.fromFile(file))
 
-        val listener = task.addOnProgressListener { snap ->
+        task.addOnProgressListener { snap ->
             val pct = if (snap.totalByteCount > 0) {
                 ((100.0 * snap.bytesTransferred) / snap.totalByteCount).toInt()
             } else 0

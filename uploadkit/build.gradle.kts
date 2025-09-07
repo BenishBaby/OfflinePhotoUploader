@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("com.google.gms.google-services")
+    id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -49,6 +51,10 @@ dependencies {
     // Firebase Storage (no google-services plugin required to compile)
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-storage-ktx:21.0.1")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.51")
+    kapt("com.google.dagger:hilt-compiler:2.51")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
