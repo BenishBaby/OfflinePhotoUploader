@@ -51,4 +51,4 @@ service firebase.storage {
 - Error handling kept simple for brevity.
 
 ## Using AI
-Some boilerplate scaffolding and file generation were assisted by an AI code assistant. All design decisions and structure were curated for clarity and modularity.
+Boilerplate scaffolding and file generation were assisted by an AI code assistant. Made use of Github Copilot and Gemini Agent Preview mode. All design decisions and structure were curated for clarity and modularity. The AI tools were particularly useful in generating the UI test cases and Unit Test cases. 
