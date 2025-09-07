@@ -3,11 +3,14 @@ package com.example.uploadkit
 import android.content.Context
 import androidx.room.Room
 import com.example.uploadkit.data.db.UploadDatabase
-import com.example.uploadkit.domain.UploadRepository
 import com.example.uploadkit.domain.usecase.EnqueuePhotosUseCase
 import com.example.uploadkit.domain.usecase.ObserveUploadsUseCase
 import com.example.uploadkit.domain.usecase.RetryFailedUseCase
-import com.example.uploadkit.infra.*
+import com.example.uploadkit.infra.AndroidFileStore
+import com.example.uploadkit.infra.FirebaseUploader
+import com.example.uploadkit.infra.NetworkMonitor
+import com.example.uploadkit.infra.QueueProcessor
+import com.example.uploadkit.infra.UploadRepositoryImpl
 
 object UploadKit {
     private lateinit var appContext: Context

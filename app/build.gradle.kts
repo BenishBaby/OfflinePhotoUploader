@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose") version "2.0.0"
     id("com.google.gms.google-services")
+    id("com.google.dagger.hilt.android") // Apply Hilt plugin
+    id("org.jetbrains.kotlin.kapt") // Apply kapt plugin for annotation processing
 }
 
 android {
@@ -60,6 +62,10 @@ dependencies {
     // Photo Picker (via Activity result APIs)
     implementation("androidx.activity:activity-ktx:1.9.2")
 
+    // Hilt dependencies
+    implementation("com.google.dagger:hilt-android:2.51")
+    kapt("com.google.dagger:hilt-compiler:2.51")
+
     // Tests
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
@@ -67,6 +73,8 @@ dependencies {
     // Core library
     androidTestImplementation("androidx.test:runner:1.6.1") // Or latest
     androidTestImplementation("androidx.test:rules:1.6.1")  // For test rules like ActivityScenarioRule
+}
 
-
+extensions.configure<org.jetbrains.kotlin.gradle.plugin.KaptExtension>("kapt") {
+    correctErrorTypes = true
 }
